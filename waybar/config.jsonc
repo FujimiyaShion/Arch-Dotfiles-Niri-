@@ -1,0 +1,112 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 10,
+    "spacing": 0,
+    "margin-top": 0,
+
+    "modules-left": ["niri/workspaces", "mpris"],
+
+    "mpris": {
+        "format": "{player_icon} {title} - {artist}",
+        "format-paused": "{status_icon} <i>{title} - {artist}</i>",
+        "max-length": 40, // 限制长度，防止歌名太长把 Bar 撑爆
+        "player-icons": {
+            "default": "󰎈",
+            "firefox": "",
+            "chromium": "",
+            "spotify": "",
+            "netease-cloud-music": "󰓇"
+        },
+        "status-icons": {
+            "paused": "󰏤"
+        },
+    },
+
+    "modules-center": ["clock"],
+    "modules-right": ["pulseaudio", "backlight" ,"network", "bluetooth","battery", "power-profiles-daemon","tray","custom/power"],
+
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "当前模式: {profile}\n驱动: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "performance": "󱐋",
+            "balanced": "☯",
+            "power-saver": ""
+        }
+    },
+
+    "custom/power": {
+        "format": "", // 电源图标
+        "tooltip": false,
+        "on-click": "wlogout", // 推荐安装 wlogout 这种带动效的注销界面
+    },
+
+    "tray": {
+        "icon-size": 10,        // 图标大小
+        "spacing": 10,          // 图标之间的间距
+        "show-passive-icons": true
+    },
+
+    "backlight": {
+        "device": "intel_backlight", // 或者是 "amd_backlight"，根据你的硬件调整
+        "format": "{icon} {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "on-scroll-up": "brightnessctl set 1%+", // 使用滚轮调节亮度
+        "on-scroll-down": "brightnessctl set 1%-",
+        "tooltip": false
+    },
+
+    "battery": {
+    "states": {
+        "warning": 30,
+        "critical": 15
+        },
+    "format": "{icon} {capacity}%",
+    "format-charging": "󱐋 {capacity}%", // 充电时的图标
+    "format-plugged": " {capacity}%",  // 插电但已满时的图标
+    "format-icons": [" ", " ", " ", " ", " "], // 从空到满的图标
+    "tooltip": true
+    },
+
+    "network": {
+        "format-wifi": "  {essid}", // Wi-Fi 图标
+        "format-ethernet": "󰈀  {ipaddr}", // 有线网络图标
+        "format-linked": "{ifname} (No IP)",
+        "format-disconnected": "󰖪  Disconnected",
+        "tooltip-format-wifi": "信号强度: {signalStrength}%",
+        "on-click": "kitty --app-id nmtui -e nmtui" // 点击打开网络设置
+    },
+
+    "bluetooth": {
+        "format": " {status}",
+        "format-connected": " {device_alias}",
+        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+        "on-click": "kitty --app-id bluetui -e bluetui" // 点击打开蓝牙管理
+    },
+
+    "niri/workspaces": {
+        "format": "{name}",
+        "on-click": "activate",
+        "all-outputs": true
+    },
+
+    "clock": {
+    // %Y: 年, %m: 月, %d: 日, %H:%M: 时间
+    "format": "  {:%Y-%m-%d  %H:%M}",
+
+    // 悬浮在时钟上时显示的提示内容（包含日历）
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "",
+        "format-icons": { "default": ["", "", ""] },
+        "on-click": "kitty --app-id wiremix -e wiremix"
+    }
+}

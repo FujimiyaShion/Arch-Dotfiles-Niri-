@@ -1,0 +1,24 @@
+window {
+    background-color: rgba(39, 35, 62, 0.95);
+}
+
+button:hover {
+    background-image: none;
+    box-shadow: none;
+    border-color: transparent;
+}
+
+button:hover>image {
+    -gtk-icon-shadow: none;
+    -gtk-icon-effect: none;
+}
+
+.highlighted-button {
+    background-image: none;
+    box-shadow: none;
+    background-color: rgba(39,35,62,1.0);
+}
+
+.highlighted-button>image, .highlighted-button:hover>image {
+    -gtk-icon-effect: highlight;
+}

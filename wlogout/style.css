@@ -1,0 +1,52 @@
+/* 全局背景设置 */
+window {
+    background-color: rgba(0, 0, 0, 0.5); /* 窗口背景半透明暗化 */
+}
+
+/* 按钮基础样式 */
+button {
+    margin: 10px;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(30, 30, 46, 0.5);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25%;
+    color: #cdd6f4;
+    transition: all 0.3s cubic-bezier(.55, 0.0, .28, 1.4); /* 增加回弹感的过渡 */
+}
+
+/* 悬浮状态 */
+button:focus,
+button:active,
+button:hover {
+    background-color: rgba(137, 180, 250, 0.2); /* 悬浮时的底色 */
+    border: 2px solid #89b4fa;               /* 边框变亮 */
+    background-size: 35%;                    /* 图标轻微放大 */
+    outline-style: none;
+}
+
+/* 绑定具体的图标 (根据你的 layout 文件名调整) */
+#lock {
+    background-image: image(url("/usr/share/wlogout/icons/lock.png"));
+}
+
+#logout {
+    background-image: image(url("/usr/share/wlogout/icons/logout.png"));
+}
+
+#suspend {
+    background-image: image(url("/usr/share/wlogout/icons/suspend.png"));
+}
+
+#hibernate {
+    background-image: image(url("/usr/share/wlogout/icons/hibernate.png"));
+}
+
+#shutdown {
+    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"));
+}
+
+#reboot {
+    background-image: image(url("/usr/share/wlogout/icons/reboot.png"));
+}

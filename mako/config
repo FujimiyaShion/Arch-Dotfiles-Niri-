@@ -1,0 +1,5 @@
+default-timeout=5000
+border-radius=8
+layer=top
+background-color=#63589d
+border-size=2

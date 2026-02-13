@@ -1,0 +1,172 @@
+/* 清除默认样式 */
+* {
+  text-shadow: none;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "Roboto", sans-serif;
+  font-weight: bold;
+  font-size: 10px;
+  min-height: 0;
+}
+
+/* 整个背景透明，实现悬浮胶囊感 */
+window#waybar {
+  background: transparent;
+  margin: 2px 4px 0px 4px;
+}
+
+/* --- 通用胶囊容器样式 --- */
+#workspaces,
+#clock,
+#battery,
+#cpu,
+#mpris,
+#memory,
+#network,
+#power-profiles-daemon,
+#custom-power,
+#bluetooth,
+#backlight,
+#pulseaudio,
+#tray {
+background-color: #1a1b26; /* Tokyo Night 深色背景 */
+color: #c0caf5;
+margin: 5px 4px;
+margin-top: 2px;
+margin-bottom: 0px;
+padding: 0 12px;
+border-radius: 15px;
+border: 1px solid rgba(255, 255, 255, 0.1); /* 极其细微的边框提升质感 */
+}
+/* --- Tooltip 整体窗口样式 --- */
+/* 1. 强制顶级窗口背景透明，消除黑色直角 */
+tooltip {
+  background-color: rgba(0, 0, 0, 0); /* 关键：彻底透明 */
+  border: none;                       /* 移除顶级边框 */
+  box-shadow: none;                   /* 移除顶级阴影 */
+}
+
+/* 2. 针对内部标签或内容容器进行美化 */
+tooltip label {
+  background-color: #1a1b26;          /* 真正的胶囊背景色 */
+  color: #c0caf5;
+  padding: 8px 12px;
+  border-radius: 12px;                /* 这里设置圆角 */
+  border: 1px solid rgba(122, 162, 247, 0.5); /* 统一方案 A 的边框 */
+}
+
+/* 3. 特殊处理：针对某些系统可能存在的内部 background 容器 */
+tooltip .background {
+  background-color: transparent;      /* 确保背景层不捣乱 */
+}
+/* --- 移除自带的默认白色背景（针对某些 GTK 主题） --- */
+
+/* --- 左侧 Niri 工作区专属样式 --- */
+#workspaces {
+padding: 0 4px; /* 减小内边距让内部按钮更紧凑 */
+}
+
+#workspaces button {
+padding: 0 10px;
+margin: 3px 2px;
+color: #565f89; /* 未激活时使用较暗的颜色 */
+background: transparent;
+border-radius: 12px;
+transition: all 0.3s cubic-bezier(.55,-0.04,.91,.94);
+}
+
+/* 当前活动的工作区（Niri 核心状态） */
+#workspaces button.active,
+#workspaces button.focused {
+background-color: #7aa2f7; /* 亮蓝色 */
+color: #1a1b26;            /* 深色文字 */
+box-shadow: 0 0 10px rgba(122, 162, 247, 0.4); /* 微微的发光效果 */
+}
+
+#workspaces button:hover {
+background-color: rgba(122, 162, 247, 0.2);
+color: #c0caf5;
+}
+
+/* --- 重点模块润色 --- */
+#clock {
+color: #bb9af7;
+font-weight: bold;
+padding: 0 16px; /* 稍微加宽一点，让长日期更好看 */
+letter-spacing: 0.5px; /* 让数字间距更清晰 */
+}
+
+#pulseaudio { color: #bb9af7; } /* 薰衣草紫 */
+#network {
+color: #7aa2f7; /* 经典的蓝色 */
+}
+
+#network.disconnected {
+color: #f7768e; /* 断开时显示红色 */
+}
+
+#bluetooth {
+color: #bb9af7; /* 紫色 */
+}
+
+#bluetooth.connected {
+color: #7da6ff; /* 连接时亮蓝色 */
+}
+
+#bluetooth.off {
+color: #565f89; /* 关闭时变灰 */
+}
+
+#battery.charging { color: #9ece6a; }
+#battery.critical:not(.charging) {
+background-color: #f7768e;
+color: #ffffff;
+animation: blink 0.5s infinite alternate;
+}
+
+@keyframes blink {
+  to { background-color: rgba(247, 118, 142, 0.5); }
+}
+
+#backlight {
+color: #e0af68;
+}
+/* 播放音频样式 */
+#mpris {
+color: #bb9af7; /* 紫色 */
+font-style: italic; /* 斜体增加辨识度 */
+font-weight: bold;
+}
+
+/* 如果播放器暂停，让颜色变暗一点 */
+#mpris.paused {
+color: #565f89;
+}
+
+/* 动效 */
+#mpris {
+animation: music_fadein 0.8s ease-out;
+}
+
+@keyframes music_fadein {
+  from {
+    opacity: 0;
+    margin-left: -20px; /* 产生一种从工作区后面滑出来的感觉 */
+  }
+  to {
+    opacity: 1;
+    margin-left: 4px;
+  }
+}
+
+#custom-power {
+color: #f7768e; /* Tokyo Night 红色 */
+padding-left: 8px;
+padding-right: 10px;
+/* 让这个胶囊稍微窄一点，看起来更像一个按钮 */
+}
+
+#power-profiles-daemon {
+font-size: 12px
+}
